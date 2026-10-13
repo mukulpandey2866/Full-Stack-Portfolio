@@ -1,25 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import type { FormEvent, KeyboardEvent } from 'react'
-import { certifications, commands, education, experience, profile, projects, skills } from './data'
+import { achievements, certifications, commands, education, experience, priorExperience, profile, projects, skills } from './data'
 
 type TerminalLine = { command?: string; output: string; error?: boolean }
 
 const navItems = [
   ['About', '#about'], ['Skills', '#skills'], ['Experience', '#experience'],
-  ['Projects', '#projects'], ['AI journey', '#ai-journey'], ['Contact', '#contact'],
+  ['Projects', '#projects'], ['AI journey', '#ai-journey'], ['Certifications', '#certifications'],
+  ['Achievements', '#achievements'], ['Contact', '#contact'],
 ]
 
 const resumeAvailable = profile.resumeUrl !== 'ADD_RESUME_URL_HERE' && profile.resumeUrl.trim().length > 0
-
-function getExpiryStatus(expiryDate: string) {
-  const timestamp = Date.parse(expiryDate)
-  if (Number.isNaN(timestamp)) return { label: `Expiry ${expiryDate}`, className: 'expiry-label' }
-  const expired = timestamp < Date.now()
-  return {
-    label: `${expired ? 'Expired' : 'Expires'} ${expiryDate}`,
-    className: expired ? 'expired-label' : 'active-label',
-  }
-}
 
 function scrollToSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -88,7 +79,7 @@ function App() {
     else if (normalized === 'whoami') output = `${profile.name}\n${profile.headline}\n${profile.location} · ${profile.experience} experience`
     else if (normalized === 'about') { output = 'Full-stack engineering experience, with a growing focus on practical AI applications.'; section = 'about' }
     else if (normalized === 'skills') { output = `${skills.length} skill groups · Java, Quarkus and MySQL are highlighted strengths.`; section = 'skills' }
-    else if (normalized === 'experience') { output = `${experience.role} · ${experience.duration} · ${experience.employer} · ${experience.dates}`; section = 'experience' }
+    else if (normalized === 'experience') { output = `${experience.role} · ${experience.duration} · ${experience.employer} · ${experience.dates}\n${priorExperience.map((item) => `${item.role} · ${item.organization} · ${item.duration}`).join('\n')}`; section = 'experience' }
     else if (normalized === 'projects') { output = projects.map((project) => `${project.number}  ${project.id}`).join('\n'); section = 'projects' }
     else if (normalized.startsWith('projects ')) {
       const projectQuery = normalized.slice('projects '.length)
@@ -105,7 +96,8 @@ function App() {
     }
     else if (normalized === 'ai-journey' || normalized === 'ai') { output = 'From machine learning foundations toward full-stack AI applications.'; section = 'ai-journey' }
     else if (normalized === 'education') { output = education.map((item) => `${item.degree} · ${item.institution}`).join('\n'); section = 'education' }
-    else if (normalized === 'certifications') { output = certifications.length ? `${certifications.length} verified credential${certifications.length === 1 ? '' : 's'} listed.` : 'No verified credentials have been added yet.'; section = 'certifications' }
+    else if (normalized === 'certifications') { output = certifications.map((item) => item.name).join('\n'); section = 'certifications' }
+    else if (normalized === 'achievements') { output = achievements.map((item) => item.title).join('\n'); section = 'achievements' }
     else if (normalized === 'resume') { output = resumeAvailable ? 'Resume link is configured.' : 'Resume coming soon. A verified PDF link has not been added yet.'; section = 'resume' }
     else if (normalized === 'contact') { output = `${profile.email}\nGitHub: ${profile.github}\nLinkedIn: ${profile.linkedin}`; section = 'contact' }
     else { output = `Command not recognized: ${raw.trim()}. Run "help" to see available commands.`; error = true }
@@ -178,7 +170,7 @@ function App() {
               {!booted && <button type="button" className="skip-boot" onClick={() => { setBootText('Initializing portfolio... ready.'); setBooted(true) }}>Skip intro <span aria-hidden="true">↗</span></button>}
             </div>
           </div>
-          <div className="hero-index" aria-hidden="true"><span>SCROLL TO EXPLORE</span><span className="index-line" /><span>01—09</span></div>
+          <div className="hero-index" aria-hidden="true"><span>SCROLL TO EXPLORE</span><span className="index-line" /><span>01—11</span></div>
         </section>
 
         <section id="about" className="section shell section-about">
@@ -195,6 +187,7 @@ function App() {
         <section id="experience" className="section shell experience-section">
           <div className="section-heading"><p className="eyebrow"><span className="eyebrow-mark">04 / EXPERIENCE</span><span className="eyebrow-line" /> PRACTICAL ENGINEERING</p><h2>{experience.role}<span className="heading-period">.</span></h2></div>
           <div className="experience-layout"><div className="experience-summary"><span className="experience-duration">02 <small>YEARS</small></span><p>Full-stack Java development<br />with an eye on the details.</p><span className="experience-missing">{experience.employer}<br />{experience.dates}</span></div><ul className="contribution-list">{experience.contributions.map((item, index) => <li key={item}><span className="contribution-index">0{index + 1}</span><span>{item}</span><span className="contribution-arrow" aria-hidden="true">↗</span></li>)}</ul></div>
+          <div className="prior-experience"><h3 className="subsection-title"><span>EARLIER EXPERIENCE</span><i aria-hidden="true" /></h3><ol className="timeline">{priorExperience.map((item) => <li className="timeline-item" key={`${item.organization}-${item.role}`}><span className="timeline-node" aria-hidden="true" /><div className="timeline-card"><h4>{item.role}</h4><p className="timeline-org">{item.organization}</p><p className="timeline-meta"><span>{item.duration}</span><span>{item.location}</span></p><a className="proof-link" href={item.certificateUrl} target="_blank" rel="noopener noreferrer" aria-label={`View certificate for ${item.role} at ${item.organization}`}>View Certificate ↗</a></div></li>)}</ol></div>
         </section>
 
         <section id="projects" className="section projects-section">
@@ -215,14 +208,13 @@ function App() {
 
         <section id="education" className="section education-section"><div className="shell"><div className="section-heading"><p className="eyebrow"><span className="eyebrow-mark">07 / EDUCATION</span><span className="eyebrow-line" /> KEEP LEARNING</p><h2>Learning is part<br /><span>of the work.</span></h2></div><div className="education-grid">{education.map((item, index) => <article className="education-item" key={item.degree}><span className="education-index">0{index + 1} / EDUCATION</span><h3>{item.degree}</h3><p>{item.institution}</p><span className="education-detail">{item.detail}</span></article>)}</div></div></section>
 
-        <section id="certifications" className="section shell credentials-section"><div className="credential-copy"><p className="eyebrow"><span className="eyebrow-mark">08 / CREDENTIALS</span><span className="eyebrow-line" /> VERIFIED ONLY</p><h2>Credentials, when<br /><span>they&apos;re ready.</span></h2><p>Verified certifications and awards will appear here once their details are confirmed.</p></div><div className="credential-content">{certifications.length ? certifications.map((credential) => {
-          const expiryStatus = credential.expiryDate ? getExpiryStatus(credential.expiryDate) : undefined
-          return <article className="credential-card" key={`${credential.name}-${credential.issuer}`}><div><h3>{credential.name}</h3>{credential.issuer && <p>{credential.issuer}</p>}</div>{expiryStatus && <span className={expiryStatus.className}>{expiryStatus.label}</span>}{credential.verificationUrl && <a href={credential.verificationUrl} target="_blank" rel="noreferrer">Verify ↗</a>}</article>
-        }) : <div className="empty-credentials"><span className="empty-icon" aria-hidden="true">＋</span><p>No credentials published yet</p><span>Entries can be added in <code>src/data.ts</code> after verification.</span></div>}</div></section>
+        <section id="certifications" className="section shell credentials-section"><div className="credential-copy"><p className="eyebrow"><span className="eyebrow-mark">08 / CERTIFICATIONS</span><span className="eyebrow-line" /> CREDENTIALS</p><h2>Certifications<span className="heading-period">.</span></h2></div><div className="credential-content">{certifications.map((credential) => <article className="credential-card" key={credential.name}><span className="card-icon" aria-hidden="true">◈</span><h3>{credential.name}</h3>{credential.verificationUrl && <a className="proof-link" href={credential.verificationUrl} target="_blank" rel="noopener noreferrer" aria-label={`View certificate: ${credential.name}`}>View Certificate ↗</a>}</article>)}</div></section>
 
-        <section id="resume" className="section shell resume-section"><div><p className="eyebrow"><span className="eyebrow-mark">09 / RESUME</span><span className="eyebrow-line" /> A CLOSER LOOK</p><h2>Want the<br /><span>full story?</span></h2></div><div className="resume-callout"><span className="resume-icon" aria-hidden="true">↗</span><div><h3>{resumeAvailable ? 'Download my resume' : 'Resume coming soon'}</h3><p>{resumeAvailable ? 'A PDF resume is ready to view.' : 'The resume link will be added here when available.'}</p></div>{resumeAvailable ? <a className="button button-primary" href={profile.resumeUrl} download="Mukul-Pandey-Resume.pdf">Download resume <span aria-hidden="true">↓</span></a> : <span className="resume-disabled">NOT YET AVAILABLE</span>}</div></section>
+        <section id="achievements" className="section shell achievements-section"><div className="section-heading"><p className="eyebrow"><span className="eyebrow-mark">09 / ACHIEVEMENTS</span><span className="eyebrow-line" /> COMPETITIONS & MILESTONES</p><h2>Achievements<span className="heading-period">.</span></h2></div><div className="achievement-grid">{achievements.map((item, index) => <article className="achievement-card" key={item.title}><span className="achievement-index" aria-hidden="true">★ 0{index + 1}</span><h3>{item.title}</h3>{item.results && <ul className="achievement-results">{item.results.map((result) => <li key={result}>{result}</li>)}</ul>}<a className="proof-link" href={item.evidenceUrl} target="_blank" rel="noopener noreferrer" aria-label={`View evidence: ${item.title}`}>View Evidence ↗</a></article>)}</div></section>
 
-        <section id="contact" className="contact-section"><div className="shell contact-inner"><div className="contact-copy"><p className="eyebrow"><span className="eyebrow-mark">10 / CONTACT</span><span className="eyebrow-line" /> OPEN TO WHAT&apos;S NEXT</p><h2>Let&apos;s build<br /><span>something useful.</span></h2><p>Reach out about full-stack engineering, AI opportunities, or a good technical conversation.</p><a className="email-link" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a></div><div className="contact-links"><a href={profile.github} target="_blank" rel="noreferrer"><span>GitHub</span><span>github.com/mukulpandey2866 ↗</span></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><span>LinkedIn</span><span>linkedin.com/in/mukul-pandey-274839210 ↗</span></a><a href={`mailto:${profile.email}`}><span>Email</span><span>{profile.email} ↗</span></a></div></div></section>
+        <section id="resume" className="section shell resume-section"><div><p className="eyebrow"><span className="eyebrow-mark">10 / RESUME</span><span className="eyebrow-line" /> A CLOSER LOOK</p><h2>Want the<br /><span>full story?</span></h2></div><div className="resume-callout"><span className="resume-icon" aria-hidden="true">↗</span><div><h3>{resumeAvailable ? 'Download my resume' : 'Resume coming soon'}</h3><p>{resumeAvailable ? 'A PDF resume is ready to view.' : 'The resume link will be added here when available.'}</p></div>{resumeAvailable ? <a className="button button-primary" href={profile.resumeUrl} download="Mukul-Pandey-Resume.pdf">Download resume <span aria-hidden="true">↓</span></a> : <span className="resume-disabled">NOT YET AVAILABLE</span>}</div></section>
+
+        <section id="contact" className="contact-section"><div className="shell contact-inner"><div className="contact-copy"><p className="eyebrow"><span className="eyebrow-mark">11 / CONTACT</span><span className="eyebrow-line" /> OPEN TO WHAT&apos;S NEXT</p><h2>Let&apos;s build<br /><span>something useful.</span></h2><p>Reach out about full-stack engineering, AI opportunities, or a good technical conversation.</p><a className="email-link" href={`mailto:${profile.email}`}>{profile.email} <span aria-hidden="true">↗</span></a></div><div className="contact-links"><a href={profile.github} target="_blank" rel="noreferrer"><span>GitHub</span><span>github.com/mukulpandey2866 ↗</span></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><span>LinkedIn</span><span>linkedin.com/in/mukul-pandey-274839210 ↗</span></a><a href={`mailto:${profile.email}`}><span>Email</span><span>{profile.email} ↗</span></a></div></div></section>
       </main>
 
       <footer className="site-footer shell"><a className="wordmark" href="#top"><span className="wordmark-mark">MP</span><span>mukul<span className="wordmark-dot">.</span></span></a><span>Designed and built with care · Pune, India</span><a href="#top">Back to top ↑</a></footer>

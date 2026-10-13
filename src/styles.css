@@ -35,7 +35,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .wordmark { display: inline-flex; gap: 10px; align-items: center; font-weight: 700; font-size: 15px; letter-spacing: .02em; }
 .wordmark-mark { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #54745b; color: var(--green); font-family: var(--mono); font-size: 10px; }
 .wordmark-dot { color: var(--green-bright); }
-.main-nav { display: flex; align-items: center; gap: 27px; }
+.main-nav { display: flex; align-items: center; gap: 27px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.main-nav::-webkit-scrollbar { display: none; }
+.main-nav a { flex: 0 0 auto; }
 .main-nav a, .header-contact { color: #aab4ab; font-size: 12px; transition: color .2s ease; }
 .main-nav a:hover, .header-contact:hover { color: var(--green-bright); }
 .header-contact { display: flex; gap: 9px; align-items: center; color: var(--text); }
@@ -189,21 +191,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .education-item p { margin: 0; color: var(--muted); font-size: 12px; }
 .education-detail { display: block; margin-top: 14px; color: #b7c4b9; font: 10px var(--mono); }
 
-.credentials-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; scroll-margin-top: 70px; }
-.credentials-section h2, .resume-section h2, .contact-copy h2 { font-size: clamp(42px, 5vw, 58px); }
-.credential-copy > p:last-child { max-width: 350px; margin: 22px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
-.empty-credentials { display: flex; min-height: 163px; flex-direction: column; align-items: flex-start; justify-content: center; padding: 23px; border: 1px dashed #35473a; background: rgba(16, 23, 18, .5); }
-.empty-icon { color: var(--green-dim); font: 20px var(--mono); }
-.empty-credentials p { margin: 11px 0 5px; color: #dce6dc; font-size: 13px; }
-.empty-credentials span:last-child { color: var(--muted); font-size: 10px; }
-.empty-credentials code { color: var(--green); font: 10px var(--mono); }
-.credential-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 17px; border-bottom: 1px solid var(--border); }
-.credential-card h3 { margin: 0; font-size: 14px; }
-.credential-card p { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
-.credential-card a, .expired-label { color: var(--green); font: 10px var(--mono); }
-.expired-label { color: #d5bc82; }
-.active-label { color: var(--green); font: 10px var(--mono); }
-.expiry-label { color: var(--muted); font: 10px var(--mono); }
+.credentials-section { display: block; scroll-margin-top: 70px; }
+.credentials-section h2, .achievements-section h2, .resume-section h2, .contact-copy h2 { font-size: clamp(42px, 5vw, 58px); }
+.credential-content { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 45px; }
+.credential-card, .achievement-card, .timeline-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 21px 23px; border: 1px solid var(--border); background: var(--surface); transition: border-color .2s ease, background .2s ease; }
+.credential-card:hover, .achievement-card:hover, .timeline-card:hover { border-color: var(--green-dim); background: var(--surface-raised); }
+.credential-card h3 { flex: 1; margin: 0; font-size: 16px; font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
+.card-icon, .achievement-index { color: var(--green-dim); font: 12px var(--mono); }
+.proof-link { padding: 7px 10px; border: 1px solid #35463a; color: var(--green); font: 10px var(--mono); transition: border-color .2s ease; }
+.proof-link:hover { border-color: var(--green); }
+
+.prior-experience { margin-top: 70px; }
+.subsection-title { display: flex; align-items: center; gap: 14px; margin: 0 0 26px; color: var(--green-dim); font: 500 10px var(--mono); letter-spacing: .08em; }
+.subsection-title i { height: 1px; flex: 1; background: var(--border); }
+.timeline { position: relative; margin: 0; padding: 0 0 0 28px; list-style: none; }
+.timeline::before { position: absolute; top: 6px; bottom: 6px; left: 4px; width: 1px; content: ''; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 12px; }
+.timeline-node { position: absolute; top: 26px; left: -28px; width: 9px; height: 9px; border: 1px solid var(--green-dim); background: var(--bg); }
+.timeline-card { gap: 6px; }
+.timeline-card h4 { margin: 0; font-size: 18px; font-weight: 500; }
+.timeline-org { margin: 0; color: var(--green); font-size: 14px; }
+.timeline-meta { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0 0 8px; color: var(--muted); font: 11px var(--mono); }
+
+.achievements-section { border-top: 1px solid var(--border); }
+.achievement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 45px; }
+.achievement-card { min-height: 170px; }
+.achievement-card h3 { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.4; }
+.achievement-results { flex: 1; margin: 0; padding: 0; list-style: none; }
+.achievement-results li { padding: 8px 0; border-top: 1px solid var(--border); color: #cbd4cc; font-size: 13px; line-height: 1.5; }
+.achievement-card > .proof-link { margin-top: auto; }
 
 .resume-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: center; padding-top: 20px; padding-bottom: 120px; scroll-margin-top: 70px; }
 .resume-callout { display: flex; align-items: center; gap: 17px; padding: 21px; border: 1px solid var(--border); background: #101713; }
@@ -232,6 +248,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 @keyframes section-reveal-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 980px) {
+  .credential-content, .achievement-grid { grid-template-columns: 1fr 1fr; }
+  .main-nav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .main-nav::-webkit-scrollbar { display: none; }
+  .main-nav a { flex: 0 0 auto; }
   .shell { width: min(100% - 56px, var(--content)); }
   .site-header { padding-inline: 28px; }
   .main-nav { gap: 15px; }
@@ -293,7 +313,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   .education-section { padding: 82px 0; }
   .education-grid { grid-template-columns: 1fr; margin-top: 30px; }
   .education-item { min-height: 155px; }
-  .credentials-section { grid-template-columns: 1fr; gap: 28px; }
+  .credentials-section { display: block; }
+  .credential-content, .achievement-grid { grid-template-columns: 1fr; margin-top: 30px; }
+  .timeline-card h4 { font-size: 16px; }
   .resume-section { grid-template-columns: 1fr; gap: 27px; padding-top: 0; padding-bottom: 87px; }
   .resume-callout { flex-wrap: wrap; padding: 15px; }
   .resume-callout > div { flex: 1; }
@@ -360,12 +382,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   .education-item h3 { font-size: 20px; }
   .education-item p { font-size: 14px; }
   .education-detail { font-size: 11px; }
-  .credential-copy > p:last-child { font-size: 15px; }
   .credential-card h3 { font-size: 16px; }
-  .credential-card p { font-size: 13px; }
-  .active-label, .expiry-label, .expired-label { font-size: 11px; }
-  .empty-credentials p { font-size: 15px; }
-  .empty-credentials span:last-child { font-size: 12px; }
+  .proof-link { font-size: 11px; }
   .resume-callout h3 { font-size: 16px; }
   .resume-callout p { font-size: 12px; }
   .resume-disabled { font-size: 9px; }
@@ -422,13 +440,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   .education-item h3 { font-size: 25px; }
   .education-item p { font-size: 18px; }
   .education-detail { font-size: 13px; }
-  .credentials-section h2, .resume-section h2, .contact-copy h2 { font-size: 73px; }
-  .credential-copy > p:last-child { font-size: 19px; }
+  .credentials-section h2, .achievements-section h2, .resume-section h2, .contact-copy h2 { font-size: 73px; }
   .credential-card h3 { font-size: 20px; }
-  .credential-card p { font-size: 17px; }
-  .active-label, .expiry-label, .expired-label { font-size: 13px; }
-  .empty-credentials p { font-size: 19px; }
-  .empty-credentials span:last-child { font-size: 15px; }
+  .proof-link { font-size: 13px; }
+  .timeline-card h4, .achievement-card h3 { font-size: 22px; }
+  .achievement-results li, .timeline-org { font-size: 17px; }
+  .timeline-meta { font-size: 14px; }
   .resume-callout { padding: 28px; }
   .resume-callout h3 { font-size: 20px; }
   .resume-callout p { font-size: 15px; }

@@ -32,6 +32,20 @@ export const experience = {
   ],
 }
 
+export type PriorExperience = {
+  role: string
+  organization: string
+  duration: string
+  location: string
+  certificateUrl: string
+}
+
+export const priorExperience: PriorExperience[] = [
+  { role: 'Campus Ambassador', organization: 'Wayspire', duration: 'February 2024 – April 2024', location: 'Prayagraj, India', certificateUrl: 'https://drive.google.com/file/d/1UQmnp3cP3BLVKPa6Y03E7N6JHYszYiwM/view' },
+  { role: 'Flutter UI Intern', organization: 'Grinler', duration: 'April 2023 – June 2023', location: 'Prayagraj, India', certificateUrl: 'https://drive.google.com/file/d/1_rIEYl9Ot_0Zj8vIjdGLPjrEA64lZWc8/view' },
+  { role: 'Event Manager', organization: 'TFUG Prayagraj', duration: 'February 2023 – July 2023', location: 'Prayagraj, India', certificateUrl: 'https://certificate.givemycertificate.com/c/d262a8b0-987b-4fc7-8014-638f1dcf7ffb' },
+]
+
 export type ProjectLink = { label: string; href: string }
 
 export type Project = {
@@ -103,11 +117,29 @@ export type Credential = {
   badgeImage?: string
 }
 
-// Add verified credentials here; incomplete entries should remain unpublished.
-export const certifications: Credential[] = []
+// Only add fields (issuer, dates) that are confirmed by the source.
+export const certifications: Credential[] = [
+  { name: 'AWS Certified in Blu Age L2 Certification', verificationUrl: 'https://drive.google.com/file/d/1Rh3ICUqMXWlc_rt6GHbsdwnol-H8sUW3/view' },
+  { name: 'Google Cloud Certified Professional Data Engineer', verificationUrl: 'https://www.coursera.org/account/accomplishments/specialization/certificate/87Q7UY4V4NYV' },
+  { name: 'NASSCOM Certified in Fundamentals of Digital Marketing Using Social Media Platforms', verificationUrl: 'https://drive.google.com/file/d/1-5J8Cz32wQ6X-ecieNNL3S1K_avG_OFI/view' },
+]
+
+export type Achievement = {
+  title: string
+  results?: string[]
+  evidenceUrl: string
+}
+
+export const achievements: Achievement[] = [
+  { title: 'Winner — NOVATHON 2022', evidenceUrl: 'https://drive.google.com/file/d/1IdctXVUk422iDy05ZkkKrC-KWIOlors4/view' },
+  { title: 'GATE 2024', results: ['Data Science and Artificial Intelligence (DA) — Rank 5322', 'Computer Science and Information Technology (CS/IT) — Rank 10246'], evidenceUrl: 'https://drive.google.com/file/d/1a3dgsItWo2omNc8EKGDVelr_ZGoYEn0-/view' },
+  { title: 'Google ML Bootcamp India', evidenceUrl: 'https://drive.google.com/file/d/16zuGEn-53y4HBx7IUXabhr5e42PzYz7E/view' },
+  { title: 'Grand Finalist — Smart India Hackathon 2022', evidenceUrl: 'https://drive.google.com/file/d/1jTmHpHtKB23AjQhp8mrmFGeTmKSDL-ya/view' },
+  { title: 'Top 10 Finalist — HackCBS 5.0', evidenceUrl: 'https://drive.google.com/file/d/12KT1L6fhnE2kqpO6JsBxHYtLMmMfRMkZ/view' },
+]
 
 export const commands = [
   'help', 'whoami', 'about', 'skills', 'experience', 'projects',
   'projects api-helper', 'projects kpms', 'projects devtrack',
-  'ai-journey', 'education', 'certifications', 'resume', 'contact', 'clear',
+  'ai-journey', 'education', 'certifications', 'achievements', 'resume', 'contact', 'clear',
 ]
