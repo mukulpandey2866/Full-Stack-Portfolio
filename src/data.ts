@@ -19,7 +19,7 @@ export const skills = [
 ]
 
 export const experience = {
-  role: 'Software Engineer Trainee',
+  role: 'Software Engineer',
   duration: '2 years',
   employer: 'Volkswagen Group Digital Solutions India (VWGDS)',
   dates: 'October 3, 2024 – Present',
