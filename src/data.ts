@@ -16,6 +16,7 @@ export const skills = [
   { title: 'Persistence', note: 'ORM & relational data', items: ['Hibernate ORM', 'JPA / ORM concepts', 'PostgreSQL', 'MySQL', 'SQL', 'Relational data modelling'] },
   { title: 'Frontend', note: 'Interfaces & application frameworks', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React', 'Vue.js', 'Angular'] },
   { title: 'Engineering & testing', note: 'Delivery, quality & operations', items: ['Git', 'Docker', 'CI/CD', 'OpenShift', 'JUnit', 'Mockito', 'Playwright', 'Postman', 'Docker-based integration testing'] },
+  { title: 'Data visualization', note: 'Reports & dashboards', items: ['Power BI reports', 'Power BI dashboards', 'Real-time live data dashboards'] },
   { title: 'Machine learning', note: 'Explored through learning and projects', items: ['Python', 'NumPy', 'pandas', 'scikit-learn', 'K-nearest neighbors (KNN)', 'Support Vector Machines (SVM)', 'Logistic regression', 'Clustering', 'Random forests', 'Parameter tuning', 'Machine learning fundamentals', 'Types of learning', 'Tensor-based concepts', 'EfficientNet-B0 and other explored models'] },
 ]
 
@@ -178,6 +179,16 @@ export const projects: Project[] = [
     description: 'A website with a large collection of resources such as books, games and videos for self-awareness.',
     stack: ['HTML', 'CSS', 'JavaScript', 'React', 'MongoDB', 'Django'],
   },
+  {
+    id: 'powerbi-sales-customer-dashboard',
+    number: '07',
+    name: 'Main Dashboard - Sales and Customer Data',
+    kind: 'Personal project · Power BI report',
+    status: 'Completed',
+    description: 'A Power BI report and dashboard covering sales and customer data.',
+    stack: ['Power BI'],
+    links: [{ label: 'Power BI report', href: 'https://app.powerbi.com/groups/me/reports/4a257df0-24b2-478f-ad7e-45a3dca6dc23/f0ecdf3c8be5640c8282?experience=power-bi' }],
+  },
 ]
 
 export const education = [
@@ -218,6 +229,6 @@ export const achievements: Achievement[] = [
 export const commands = [
   'help', 'whoami', 'about', 'skills', 'experience', 'projects',
   'projects api-helper', 'projects kpms', 'projects devtrack',
-  'projects plant-disease-detection', 'projects cancer-house-price-prediction', 'projects antardarshnam',
+  'projects plant-disease-detection', 'projects cancer-house-price-prediction', 'projects antardarshnam', 'projects powerbi-sales-customer-dashboard',
   'ai-journey', 'education', 'certifications', 'achievements', 'resume', 'contact', 'clear',
 ]
