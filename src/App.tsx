@@ -92,7 +92,7 @@ function App() {
     else if (normalized === 'projects') { output = projects.map((project) => `${project.number}  ${project.id}`).join('\n'); section = 'projects' }
     else if (normalized.startsWith('projects ')) {
       const projectQuery = normalized.slice('projects '.length)
-      const project = projects.find((item) => item.id === projectQuery || (projectQuery === 'elite' && item.id === 'elite-stays'))
+      const project = projects.find((item) => item.id === projectQuery)
       if (project) {
         output = `${project.name}\n${project.description}`
         section = 'projects'
@@ -101,7 +101,7 @@ function App() {
         if (caseStudy) caseStudy.open = true
         window.setTimeout(() => card?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80)
       }
-      else { output = `Project not found: ${projectQuery}. Try: api-helper, kpms, elite-stays.`; error = true }
+      else { output = `Project not found: ${projectQuery}. Try: api-helper, kpms, devtrack.`; error = true }
     }
     else if (normalized === 'ai-journey' || normalized === 'ai') { output = 'From machine learning foundations toward full-stack AI applications.'; section = 'ai-journey' }
     else if (normalized === 'education') { output = education.map((item) => `${item.degree} · ${item.institution}`).join('\n'); section = 'education' }
@@ -198,10 +198,10 @@ function App() {
         </section>
 
         <section id="projects" className="section projects-section">
-          <div className="shell"><div className="section-heading section-heading-row"><div><p className="eyebrow"><span className="eyebrow-mark">05 / SELECTED WORK</span><span className="eyebrow-line" /> BUILT, LEARNED, IN PROGRESS</p><h2>Projects with<br /><span>purpose.</span></h2></div><div className="project-index-terminal"><span>mukul@portfolio:~/projects$ ls</span><span>01 api-helper</span><span>02 kpms-field-np-services</span><span>03 elite-stays-hotels</span></div></div>
+          <div className="shell"><div className="section-heading section-heading-row"><div><p className="eyebrow"><span className="eyebrow-mark">05 / SELECTED WORK</span><span className="eyebrow-line" /> BUILT, LEARNED, IN PROGRESS</p><h2>Projects with<br /><span>purpose.</span></h2></div><div className="project-index-terminal"><span>mukul@portfolio:~/projects$ ls</span><span>01 api-helper</span><span>02 kpms-field-np-services</span><span>03 devtrack</span></div></div>
             <div className="project-list">{projects.map((project) => <article className="project-card" id={project.id} key={project.id}>
               <div className="project-card-head"><span className="project-number">{project.number}</span><span className="project-kind">{project.kind}</span><span className={`project-status ${project.status === 'In progress' ? 'status-progress' : ''}`}><i aria-hidden="true" />{project.status}</span></div>
-              <div className="project-card-main"><div className="project-title-col"><h3>{project.name}</h3><p className="project-status-mobile">{project.status}</p></div><div className="project-detail-col"><p className="project-description">{project.description}</p><details className="case-study"><summary>Explore case study <span aria-hidden="true">＋</span></summary><div className="case-study-content"><div><h4>Overview</h4><p>{project.problem}</p></div><div><h4>Contribution & technical highlights</h4><ul>{project.contribution.map((item) => <li key={item}>{item}</li>)}</ul></div>{project.id === 'elite-stays' && <div className="project-todo"><h4>Project details</h4><p>Features, implementation details, screenshots, and demo or repository links can be added as the project progresses.</p></div>}<div><h4>Technology</h4><div className="project-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></div></div></details></div></div>
+              <div className="project-card-main"><div className="project-title-col"><h3>{project.name}</h3><p className="project-status-mobile">{project.status}</p></div><div className="project-detail-col"><p className="project-description">{project.description}</p>{project.links && <div className="project-links">{project.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>)}</div>}<details className="case-study"><summary>Explore case study <span aria-hidden="true">＋</span></summary><div className="case-study-content"><div><h4>Overview</h4><p>{project.problem}</p></div><div><h4>Contribution & technical highlights</h4><ul>{project.contribution.map((item) => <li key={item}>{item}</li>)}</ul></div>{project.preview && <div><h4>Terminal preview</h4><pre className="project-preview">{project.preview.join('\n')}</pre></div>}<div><h4>Technology</h4><div className="project-stack">{project.stack.map((item) => <span key={item}>{item}</span>)}</div></div></div></details></div></div>
             </article>)}</div>
             <div className="project-confidential-note"><span className="note-marker">i</span> Internal project details are intentionally limited to the approved public summaries.</div>
           </div>

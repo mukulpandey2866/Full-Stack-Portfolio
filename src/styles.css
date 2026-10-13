@@ -156,7 +156,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .case-study-content p, .case-study-content li { color: var(--muted); font-size: 11px; line-height: 1.7; }
 .case-study-content p { margin: 0; }
 .case-study-content ul { display: grid; gap: 5px; margin: 0; padding-left: 15px; }
-.project-todo { padding: 13px; border: 1px dashed #405744; }
+.project-preview { margin: 0; padding: 13px; overflow-x: auto; border: 1px solid #35463a; background: #0a100c; color: #bad4be; font: 10px/1.7 var(--mono); }
+.project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.project-links a { padding: 7px 10px; border: 1px solid #35463a; color: var(--green); font: 10px var(--mono); }
+.project-links a:hover { border-color: var(--green); }
 .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
 .project-stack span { padding: 6px 8px; background: #18231b; color: #bad4be; font: 9px var(--mono); }
 .project-confidential-note { display: flex; align-items: center; gap: 9px; margin-top: 18px; color: #7d8c80; font: 10px var(--mono); }

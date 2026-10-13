@@ -32,7 +32,23 @@ export const experience = {
   ],
 }
 
-export const projects = [
+export type ProjectLink = { label: string; href: string }
+
+export type Project = {
+  id: string
+  number: string
+  name: string
+  kind: string
+  status: string
+  description: string
+  problem: string
+  contribution: string[]
+  stack: string[]
+  links?: ProjectLink[]
+  preview?: string[]
+}
+
+export const projects: Project[] = [
   {
     id: 'api-helper',
     number: '01',
@@ -56,15 +72,20 @@ export const projects = [
     stack: ['Quarkus', 'MySQL', 'Vue.js', 'JavaScript'],
   },
   {
-    id: 'elite-stays',
+    id: 'devtrack',
     number: '03',
-    name: 'Elite Stays Hotels',
-    kind: 'Freelance · Full-stack development',
-    status: 'In progress',
-    description: 'Developing a full-stack hotel booking application with a React frontend, Spring Boot backend APIs, and a PostgreSQL database. The project involves frontend development, API implementation, and database integration to support a hotel booking system.',
-    problem: 'A full-stack hotel booking application is in development; specific functionality is not yet published.',
-    contribution: ['React frontend development.', 'Spring Boot backend API implementation.', 'PostgreSQL database integration.'],
-    stack: ['React', 'Spring Boot', 'PostgreSQL'],
+    name: 'DevTrack',
+    kind: 'Personal project · Issue & project management platform',
+    status: 'Deployed',
+    description: 'A full-stack issue and project management platform for organizing projects, tracking issues, and collaborating through comments. It pairs a React and TypeScript frontend with a Java Spring Boot REST API and a PostgreSQL database hosted on Neon, with the frontend and backend deployed independently.',
+    problem: 'Teams need one place to organize projects, track issues, and discuss work without scattering context across tools.',
+    contribution: ['User authentication with login and registration.', 'Project and issue management through a React and TypeScript interface.', 'Issue tracking with comment-based collaboration.', 'Spring Boot REST API with Spring Data JPA and Hibernate, documented with Swagger UI.', 'PostgreSQL on Neon, with independent frontend and backend deployments.'],
+    stack: ['React', 'TypeScript', 'Vite', 'Axios', 'React Router', 'Java 21', 'Spring Boot', 'Spring Data JPA', 'Hibernate', 'REST API', 'PostgreSQL', 'Neon'],
+    links: [
+      { label: 'Frontend (live demo)', href: 'https://devtrack-frontend-omega.vercel.app/login' },
+      { label: 'Backend (Swagger API docs)', href: 'https://devtrack-backend-qm3r.onrender.com' },
+    ],
+    preview: ['$ devtrack --status', 'frontend  react + typescript   vercel', 'backend   spring boot (java 21) render', 'database  postgresql           neon', 'status    deployed'],
   },
 ]
 
@@ -87,6 +108,6 @@ export const certifications: Credential[] = []
 
 export const commands = [
   'help', 'whoami', 'about', 'skills', 'experience', 'projects',
-  'projects api-helper', 'projects kpms', 'projects elite-stays',
+  'projects api-helper', 'projects kpms', 'projects devtrack',
   'ai-journey', 'education', 'certifications', 'resume', 'contact', 'clear',
 ]
