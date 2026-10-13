@@ -6,6 +6,7 @@ export const profile = {
   email: 'mukulpandey2866@gmail.com',
   github: 'https://github.com/mukulpandey2866',
   linkedin: 'https://linkedin.com/in/mukul-pandey-274839210',
+  leetcode: 'https://leetcode.com/u/mukul_pandey/',
   resumeUrl: '/mukul-pandey-resume.pdf',
   intro: "I'm a Full Stack Developer passionate about building scalable, reliable, and user-friendly applications. I work with technologies like Java, Quarkus, React, Vue and SQL to turn complex problems into practical solutions. With a background in machine learning and a strong interest in AI, I'm exploring ways to build smarter, AI-powered applications. I enjoy learning new technologies, solving challenging problems, and turning ideas into impactful products.",
 }
@@ -17,6 +18,12 @@ export const skills = [
   { title: 'Engineering & testing', note: 'Delivery, quality & operations', items: ['Git', 'Docker', 'CI/CD', 'OpenShift', 'JUnit', 'Mockito', 'Playwright', 'Postman', 'Docker-based integration testing'] },
   { title: 'Machine learning', note: 'Explored through learning and projects', items: ['Python', 'NumPy', 'pandas', 'scikit-learn', 'K-nearest neighbors (KNN)', 'Support Vector Machines (SVM)', 'Logistic regression', 'Clustering', 'Random forests', 'Parameter tuning', 'Machine learning fundamentals', 'Types of learning', 'Tensor-based concepts', 'EfficientNet-B0 and other explored models'] },
 ]
+
+export type WorkProject = {
+  name: string
+  description: string
+  components?: { name: string; description: string }[]
+}
 
 export const experience = {
   role: 'Software Engineer',
@@ -30,6 +37,45 @@ export const experience = {
     'Onboarded multiple projects into a centralized Project Filter service.',
     'Contributed to an export service and participated in peer code reviews.',
   ],
+  projects: [
+    {
+      name: 'Jira Services',
+      description: 'Three parts that together make up the Jira services project.',
+      components: [
+        { name: 'Jira Data', description: 'Serves Jira data through APIs.' },
+        { name: 'Jira Filter', description: 'Onboarded onto the Ticket Filter Service.' },
+        { name: 'Jira Ingest', description: 'A cron job that fetches Jira data into the data warehouse. I also built a cron job that periodically removes orphan tickets.' },
+      ],
+    },
+    {
+      name: 'KPM Services',
+      description: 'A larger application along the lines of KPMS Feld/NP, made up of two parts.',
+      components: [
+        { name: 'KPM Filter', description: 'Onboarded onto the Ticket Filter Service.' },
+        { name: 'KPM Data Service', description: 'Supplies the data for problem numbers on the Ticket Filter Service through data APIs.' },
+      ],
+    },
+    {
+      name: 'KPMS Halle Services',
+      description: 'Follows the same structure as KPM Services.',
+      components: [
+        { name: 'KPMS Halle Filter', description: 'Onboarded onto the Ticket Filter Service.' },
+        { name: 'KPMS Halle Data Service', description: 'Supplies data on the Ticket Filter Service through data APIs.' },
+      ],
+    },
+    {
+      name: 'KPMS Feld/NP Services',
+      description: 'Follows the same structure as KPM Services.',
+      components: [
+        { name: 'KPMS Feld/NP Filter', description: 'Onboarded onto the Ticket Filter Service.' },
+        { name: 'KPMS Feld/NP Data Service', description: 'Supplies data on the Ticket Filter Service through data APIs.' },
+      ],
+    },
+    { name: 'Ticket Filter Service', description: 'Frontend and backend service onto which the KPM, KPMS Halle, KPMS Feld/NP and Jira filters are onboarded. Part of the FAP data warehouse project, giving users easy access to data through these filters. I implemented random-access lazy loading here.' },
+    { name: 'Export Service', description: 'Users select columns from a list and request an export through REST APIs; a background job processes the request and the finished file can be downloaded. I built the REST APIs and the UI.' },
+    { name: 'Image Service', description: 'Fetches images, compresses them, stores them in an Amazon S3 bucket, and returns a link for viewing and download.' },
+    { name: 'Helm Charts for Environment Controls', description: 'Helm charts used to manage environment-specific configuration.' },
+  ] as WorkProject[],
 }
 
 export type PriorExperience = {
@@ -55,8 +101,8 @@ export type Project = {
   kind: string
   status: string
   description: string
-  problem: string
-  contribution: string[]
+  problem?: string
+  contribution?: string[]
   stack: string[]
   links?: ProjectLink[]
   preview?: string[]
@@ -101,11 +147,42 @@ export const projects: Project[] = [
     ],
     preview: ['$ devtrack --status', 'frontend  react + typescript   vercel', 'backend   spring boot (java 21) render', 'database  postgresql           neon', 'status    deployed'],
   },
+  {
+    id: 'plant-disease-detection',
+    number: '04',
+    name: 'Deep Learning based Disease Detection System for Plants',
+    kind: 'College project · Jan 2024 – Jun 2024',
+    status: 'Completed',
+    description: 'A deep learning system for detecting plant diseases, built with a CNN and EfficientNetB0 and tuned through parameter tuning.',
+    contribution: ['Reported accuracy: 99.86%.'],
+    stack: ['Python', 'Streamlit', 'CNN', 'EfficientNetB0', 'Parameter tuning'],
+    links: [{ label: 'Google Colab notebook', href: 'https://drive.google.com/file/d/1ydD2Ks--TII4MKyUCpvdDUix55JOpqVp/view?usp=drive_link' }],
+  },
+  {
+    id: 'cancer-house-price-prediction',
+    number: '05',
+    name: 'Cancer Cell Type Prediction & House Price Prediction',
+    kind: 'College project · 2022 – 2024',
+    status: 'Completed',
+    description: 'Two machine learning prediction projects: cancer cell type prediction and house price prediction.',
+    contribution: ['Reported accuracy: 99% and 100%.'],
+    stack: ['Python', 'Logistic Regression', 'Support Vector Machine'],
+    links: [{ label: 'Colab notebook', href: 'https://colab.research.google.com/drive/1qGz2DhpJcD8dsy4SQhGjq0yi7n7X-AQN' }],
+  },
+  {
+    id: 'antardarshnam',
+    number: '06',
+    name: 'Antardarshnam',
+    kind: 'College project · Sep 2021 – Jan 2022 · Smart India Hackathon 2022',
+    status: 'Completed',
+    description: 'A website with a large collection of resources such as books, games and videos for self-awareness.',
+    stack: ['HTML', 'CSS', 'JavaScript', 'React', 'MongoDB', 'Django'],
+  },
 ]
 
 export const education = [
   { degree: 'Bachelor of Technology (B.Tech.)', institution: 'IERT Prayagraj', detail: 'Graduated 2024' },
-  { degree: 'Master of Business Administration (MBA)', institution: 'IGNOU', detail: 'Pursuing · Fourth semester' },
+  { degree: 'Master of Business Administration (MBA)', institution: 'IGNOU', detail: 'Pursuing · Fourth semester · Completion by 2026' },
 ]
 
 export type Credential = {
@@ -141,5 +218,6 @@ export const achievements: Achievement[] = [
 export const commands = [
   'help', 'whoami', 'about', 'skills', 'experience', 'projects',
   'projects api-helper', 'projects kpms', 'projects devtrack',
+  'projects plant-disease-detection', 'projects cancer-house-price-prediction', 'projects antardarshnam',
   'ai-journey', 'education', 'certifications', 'achievements', 'resume', 'contact', 'clear',
 ]
