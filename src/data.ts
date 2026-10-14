@@ -72,8 +72,8 @@ export const experience = {
         { name: 'KPMS Feld/NP Data Service', description: 'Supplies data on the Ticket Filter Service through data APIs.' },
       ],
     },
-    { name: 'Ticket Filter Service', description: 'Frontend and backend service onto which the KPM, KPMS Halle, KPMS Feld/NP and Jira filters are onboarded. Part of the FAP data warehouse project, giving users easy access to data through these filters. I implemented random-access lazy loading here.' },
-    { name: 'Export Service', description: 'Users select columns from a list and request an export through REST APIs; a background job processes the request and the finished file can be downloaded. I built the REST APIs and the UI.' },
+    { name: 'Ticket Filter Service', description: 'Frontend and backend service onto which the KPM, KPMS Halle, KPMS Feld/NP and Jira filters are onboarded. Part of the FAP data warehouse project, giving users easy access to data through these filters. I have made many enhancements here, including random-access lazy loading.' },
+    { name: 'Export Service', description: 'Users select columns from a list and request an export through REST APIs; a background job processes the request and the finished file can be downloaded. I built the REST APIs and the UI, plus a feature that generates a presigned URL to download files. For security, the URL is valid for 15 minutes.' },
     { name: 'Image Service', description: 'Fetches images, compresses them, stores them in an Amazon S3 bucket, and returns a link for viewing and download.' },
     { name: 'Helm Charts for Environment Controls', description: 'Helm charts used to manage environment-specific configuration.' },
   ] as WorkProject[],
@@ -157,7 +157,7 @@ export const projects: Project[] = [
     description: 'A deep learning system for detecting plant diseases, built with a CNN and EfficientNetB0 and tuned through parameter tuning.',
     contribution: ['Reported accuracy: 99.86%.'],
     stack: ['Python', 'Streamlit', 'CNN', 'EfficientNetB0', 'Parameter tuning'],
-    links: [{ label: 'Google Colab notebook', href: 'https://drive.google.com/file/d/1ydD2Ks--TII4MKyUCpvdDUix55JOpqVp/view?usp=drive_link' }],
+    links: [{ label: 'Download Model', href: 'https://drive.google.com/file/d/1ydD2Ks--TII4MKyUCpvdDUix55JOpqVp/view?usp=drive_link' }],
   },
   {
     id: 'cancer-house-price-prediction',
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     kind: 'Personal project · Power BI report',
     status: 'Completed',
     description: 'A Power BI report and dashboard covering sales and customer data.',
-    stack: ['Power BI'],
+    stack: ['Power BI', 'Data Visualization', 'DAX', 'Power Query', 'Data Integration', 'ETL', 'Table Joins', 'Data Modeling', 'Power BI Report Embedding', 'Data Validation'],
     links: [{ label: 'Power BI report', href: 'https://app.powerbi.com/groups/me/reports/4a257df0-24b2-478f-ad7e-45a3dca6dc23/f0ecdf3c8be5640c8282?experience=power-bi' }],
   },
 ]
@@ -208,7 +208,7 @@ export type Credential = {
 // Only add fields (issuer, dates) that are confirmed by the source.
 export const certifications: Credential[] = [
   { name: 'AWS Certified in Blu Age L2 Certification', verificationUrl: 'https://drive.google.com/file/d/1Rh3ICUqMXWlc_rt6GHbsdwnol-H8sUW3/view' },
-  { name: 'Google Cloud Certified Professional Data Engineer', verificationUrl: 'https://www.coursera.org/account/accomplishments/specialization/certificate/87Q7UY4V4NYV' },
+  { name: 'Google Cloud Certified Professional Data Engineer (coursera)', verificationUrl: 'https://www.coursera.org/account/accomplishments/specialization/certificate/87Q7UY4V4NYV' },
   { name: 'NASSCOM Certified in Fundamentals of Digital Marketing Using Social Media Platforms', verificationUrl: 'https://drive.google.com/file/d/1-5J8Cz32wQ6X-ecieNNL3S1K_avG_OFI/view' },
 ]
 
@@ -224,6 +224,7 @@ export const achievements: Achievement[] = [
   { title: 'Innovation Award — VWGDS', results: ['For the development of API Helper'], evidenceUrl: 'https://drive.google.com/file/d/1HfWuTpzELSo-gh6hs653yyY4VfKgs9m5/view' },
   { title: 'Winner — NOVATHON 2022', evidenceUrl: 'https://drive.google.com/file/d/1IdctXVUk422iDy05ZkkKrC-KWIOlors4/view' },
   { title: 'GATE 2024', results: ['Data Science and Artificial Intelligence (DA) — Rank 5322', 'Computer Science and Information Technology (CS/IT) — Rank 10246'], evidenceUrl: 'https://drive.google.com/file/d/1a3dgsItWo2omNc8EKGDVelr_ZGoYEn0-/view' },
+  { title: 'GATE 2026', results: ['Data Science and Artificial Intelligence (DA) — Rank 6110', 'Computer Science and Information Technology (CS/IT) — Rank 8074'], evidenceUrl: 'https://drive.google.com/file/d/1ypVKrH6SaGLCoxFY1-uMW2792kaPdJFI/view?usp=drivesdk' },
   { title: 'Google ML Bootcamp India', evidenceUrl: 'https://drive.google.com/file/d/16zuGEn-53y4HBx7IUXabhr5e42PzYz7E/view' },
   { title: 'Grand Finalist — Smart India Hackathon 2022', evidenceUrl: 'https://drive.google.com/file/d/1jTmHpHtKB23AjQhp8mrmFGeTmKSDL-ya/view' },
   { title: 'Top 10 Finalist — HackCBS 5.0', evidenceUrl: 'https://drive.google.com/file/d/12KT1L6fhnE2kqpO6JsBxHYtLMmMfRMkZ/view' },
