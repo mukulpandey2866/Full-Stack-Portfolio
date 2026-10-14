@@ -219,6 +219,9 @@ export type Achievement = {
 }
 
 export const achievements: Achievement[] = [
+  { title: 'TrendSetter Award — VWGDS', results: ['For the development of API Helper'], evidenceUrl: 'https://drive.google.com/file/d/1h-2V30xmmF-yJ8CTghzjXqEms0zL1KYw/view' },
+  { title: 'InstaPat Award — VWGDS', results: ['For the development of Export Service'], evidenceUrl: 'https://drive.google.com/file/d/1lKm64WPDj1HkCZfunSZs_5f-XjP-qOZs/view' },
+  { title: 'Innovation Award — VWGDS', results: ['For the development of API Helper'], evidenceUrl: 'https://drive.google.com/file/d/1HfWuTpzELSo-gh6hs653yyY4VfKgs9m5/view' },
   { title: 'Winner — NOVATHON 2022', evidenceUrl: 'https://drive.google.com/file/d/1IdctXVUk422iDy05ZkkKrC-KWIOlors4/view' },
   { title: 'GATE 2024', results: ['Data Science and Artificial Intelligence (DA) — Rank 5322', 'Computer Science and Information Technology (CS/IT) — Rank 10246'], evidenceUrl: 'https://drive.google.com/file/d/1a3dgsItWo2omNc8EKGDVelr_ZGoYEn0-/view' },
   { title: 'Google ML Bootcamp India', evidenceUrl: 'https://drive.google.com/file/d/16zuGEn-53y4HBx7IUXabhr5e42PzYz7E/view' },
